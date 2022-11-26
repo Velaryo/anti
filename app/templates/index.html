@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="c__index">
+
+    {% for pj in personajes %}
+        
+        <div class="box__index">
+            <div class="box__img">
+                <img src="{{pj.avatar}}" alt="">
+                <br>
+            </div>
+            <div class="box__info">
+                <div>
+                    <a href="{{ url_for("rickoso.perfil", id=pj._id) }}"><p class="titulo">{{pj.nombre}}</p></a>
+
+                    {% if pj.estado == 'Alive' %}
+                        <span class="estado verde">
+                    {% endif %} 
+                    {% if pj.estado == 'Dead' %}
+                        <span class="estado rojo">
+                    {% endif %}
+                    {% if pj.estado == 'unknown' %}
+                        <span class="estado naranja">
+                    {% endif %}
+                    {{pj.estado}} -  {{pj.especie}}</span>
+                </div>
+
+                <div>
+                    <p class="subTitulo"> Last known location: </p>
+                        
+                        <p class="texto">{{pj.ultimaVez[0]}}</p>
+                    <br>
+                    <p class="subTitulo"> First seen in: </p>
+                    <p class="texto">{{pj.primeraVez[0]}}</p>
+                </div>
+
+            </div>
+        </div>
+    {% endfor %}
+
+</div>
+
+{% endblock  %}
